@@ -2,6 +2,7 @@ from turtle import Turtle, Screen
 import pandas
 BLANK_STATE_IMAGE_PATH = "blank_states_img.gif"
 STATE_DATA_PATH = "50_states.csv"
+MISSED_STATES_PATH = "missed_states.csv"
 ALIGNMENT = 'center'
 FONT = ('Courier', 8, 'normal')
 
@@ -40,4 +41,14 @@ while states_correct < 50:
         states_correct += 1
         guessed_states.append(prompt_response.lower())
 
-screen.mainloop()
+
+missed_states = []
+for state in list_of_states:
+    if state not in guessed_states:
+        missed_states.append(state)
+
+missed_states_dict = {
+    "Missed States": missed_states,
+}
+
+pandas.DataFrame(missed_states_dict).to_csv(MISSED_STATES_PATH)
