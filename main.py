@@ -41,12 +41,7 @@ while states_correct < 50:
         states_correct += 1
         guessed_states.append(prompt_response.lower())
 
-
-missed_states = []
-for state in list_of_states:
-    if state not in guessed_states:
-        missed_states.append(state)
-
+missed_states = [state for state in list_of_states if state not in guessed_states]
 missed_states_dict = {
     "Missed States": missed_states,
 }
